@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JavaScript 手写题目 | 哎! 就是玩~</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="new 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例。
+> 过程：1. 创建一个对象
+>      2. 链接该对象到另一个对象 - 即设置该对象的 constructor 为实例化构造函数
+>      3. 将 步骤1 新创建的对象作为this的上下文
+>      4. 如果该函数没有返回对象，则返回this
+`
+Function. ...">
+    
+    <link rel="preload" href="/assets/css/0.styles.59a41dfe.css" as="style"><link rel="preload" href="/assets/js/app.a5a1f001.js" as="script"><link rel="preload" href="/assets/js/6.e4377708.js" as="script"><link rel="preload" href="/assets/js/3.97575248.js" as="script"><link rel="preload" href="/assets/js/12.e2ea5c1c.js" as="script"><link rel="prefetch" href="/assets/js/10.e7ac7f61.js"><link rel="prefetch" href="/assets/js/11.0ae09f89.js"><link rel="prefetch" href="/assets/js/13.8461bad6.js"><link rel="prefetch" href="/assets/js/14.9188933b.js"><link rel="prefetch" href="/assets/js/4.375976eb.js"><link rel="prefetch" href="/assets/js/5.31510287.js"><link rel="prefetch" href="/assets/js/7.4fe554d4.js"><link rel="prefetch" href="/assets/js/8.cdb62f07.js"><link rel="prefetch" href="/assets/js/9.c178b71a.js"><link rel="prefetch" href="/assets/js/vuejs-paginate.5d3d092e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.59a41dfe.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-blog__global-layout"><section id="header-wrapper"><header id="header"><div class="header-wrapper"><div class="title"><a href="/" class="nav-link home-link">哎! 就是玩~ </a></div> <div class="header-right-wrap"><ul class="nav"><li class="nav-item"><a href="/" class="nav-link">Blog</a></li><li class="nav-item"><a href="/tag/" class="nav-link">Tags</a></li></ul> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></div></header></section> <div id="mobile-header"><div class="mobile-header-bar"><div class="mobile-header-title"><a href="/" class="nav-link mobile-home-link">哎! 就是玩~ </a> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></div> <div class="mobile-menu-wrapper"><hr class="menu-divider"> <ul class="mobile-nav"><li class="mobile-nav-item"><a href="/" class="nav-link">Blog</a></li><li class="mobile-nav-item"><a href="/tag/" class="nav-link">Tags</a></li> <li class="mobile-nav-item"><!----></li></ul></div></div></div> <div class="content-wrapper"><div id="vuepress-theme-blog__post-layout"><article itemscope="itemscope" itemtype="https://schema.org/BlogPosting" class="vuepress-blog-theme-content"><header><h1 itemprop="name headline" class="post-title">
+        JavaScript 手写题目
+      </h1> <div class="post-meta"><div itemprop="publisher author" itemtype="http://schema.org/Person" itemscope="itemscope" class="post-meta-author"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-navigation"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg> <span itemprop="name">scl</span> <span itemprop="address">   in WH</span></div> <div class="post-meta-date"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <time pubdate itemprop="datePublished" datetime="2021-04-23T00:00:00.000Z">
+      Fri Apr 23 2021
+    </time></div> <ul itemprop="keywords" class="post-meta-tags"><li class="post-tag" data-v-42ccfcd5><a href="/tag/JavaScript" data-v-42ccfcd5><span data-v-42ccfcd5>JavaScript</span></a></li></ul></div></header> <div itemprop="articleBody" class="content__default"><h2 id="手写-new-函数"><a href="#手写-new-函数" class="header-anchor">#</a> 手写 <code>new</code> 函数</h2> <blockquote><p><code>new</code> 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象的实例。
+过程：1. 创建一个对象
+2. 链接该对象到另一个对象 - 即设置该对象的 <code>constructor</code> 为实例化构造函数
+3. 将 步骤1 新创建的对象作为this的上下文
+4. 如果该函数没有返回对象，则返回this</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>Function.prototype.fakeNew(Constructor, ...args) {
+    const obj = Object.create(Constructor.protoType);
+    const res = Constructor.call(obj, ...args);
+    return typeof res === 'object' ? res : obj;
+}
+</code></pre></div><h2 id="手写-call-函数"><a href="#手写-call-函数" class="header-anchor">#</a> 手写 call 函数</h2> <blockquote><p><code>all()</code> 方法使用一个指定的 this 值和单独给出的一个或多个参数来调用一个函数</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>Function.prototype.fakeCall(...args) {
+    const [thisObj，...rest] = args;
+    thisObj.func = this;
+    const res = thisObj.func(...rest);
+    Reflect.deleteProperty(thisObj, 'func');
+    return res;
+}
+</code></pre></div><h2 id="手写-apply-函数"><a href="#手写-apply-函数" class="header-anchor">#</a> 手写 apply 函数</h2> <blockquote><p>apply() 方法调用一个具有给定this值的函数，以及以一个数组（或类数组对象）的形式提供的参数</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>Function.prototype.fakeApply(...args) {
+    const [thisObj, ...rest] = args;
+    thisObj.func = this;
+    const res = thisObj.func(...rest);
+    Reflect.deleteProperty(thisObg, 'func');
+    return res;
+}
+</code></pre></div><h2 id="手写-bind-函数"><a href="#手写-bind-函数" class="header-anchor">#</a> 手写 bind 函数</h2> <blockquote><p>bind() 方法创建一个新的函数，在 bind() 被调用时，这个新函数的 this 被指定为 bind() 的第一个参数，而其余参数将作为新函数的参数，供调用时使用。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>Function.prototype.fakeBind(...args) {
+    const func = this;
+    const [thisObj, ...firstArgs] = args;
+    const res = function (...sedArgs) {
+        return func.apply(this.constructor === func ? this : thisObj, firstArgs.concat(sedArgs));
+    }
+    res.protoType = Object.create(func.protoType);
+    return res;
+}
+</code></pre></div><h2 id="实现类的继承"><a href="#实现类的继承" class="header-anchor">#</a> 实现类的继承</h2> <div class="language- extra-class"><pre class="language-text"><code>function Parent() {}
+
+function Child(...args) {
+    // 将父类的构造函数绑定在子类上
+    Parent.call(this, ...args);
+}
+// 继承原型上的属性和方法
+Child.protoType = Object.create(Parent.protoType);
+// 将原型构造函数 设置为 当前构造函数
+Child.prototype.constructor = Child;
+
+</code></pre></div><h2 id="深克隆-deepclone"><a href="#深克隆-deepclone" class="header-anchor">#</a> 深克隆（deepclone）</h2> <div class="language- extra-class"><pre class="language-text"><code>function deepClone(param) {
+    if (typeof param !== 'object') return param;
+    const type = Object.protoType.toString.call(param);
+    swtich (type) {
+        // 可以增加其他类型的复制
+        case 'object Array':
+            const res = [];
+            for (let key in param) {
+                res[key] = deepClone(param[key]);
+            }
+            return res;
+        default:
+            const res = {};
+            for (let key in param) {
+                res[key] = deepClone(param[key]);
+            }
+            return res;
+    }
+}
+
+
+JSON.parse(JSON.stringify(data, (item) =&gt; {
+    if (typeof item === 'function') {
+        return {
+            type: 'function',
+            source: item.toString();
+        }
+    }
+    return item;
+}), (item) =&gt; {
+    if (typeof item === 'object' &amp;&amp; item.type === 'function') {
+        return eval(item.toString());
+    }
+    return item;
+}))
+</code></pre></div><h2 id="节流"><a href="#节流" class="header-anchor">#</a> 节流</h2> <blockquote><p>如果一个函数持续的，频繁的触发，那么就让他在一定的时间间隔后触发, 单纯的降低代码执行的频率，保证一段时间内核心代码只执行一次</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function throttle(fn, time) {
+    let timer;
+    return (...args) =&gt; {
+        if (timer) {
+            return;
+        }
+        timer = setTimeout(() =&gt; {
+            fn(...args);
+        }, time);
+    }
+    
+}
+</code></pre></div><h2 id="防抖"><a href="#防抖" class="header-anchor">#</a> 防抖</h2> <blockquote><p>触发事件后函数不会立即执行，而是在n秒之后执行，如果n秒之内又触发了事件，则会重新计算函数执行时间。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>function debounce(fn, time) {
+    let timer;
+    return (...args) =&gt; {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        timer = setTimeout(() =&gt; {
+            fn(...args);
+        }, time);
+    }
+}
+</code></pre></div><h2 id="实现instanceof"><a href="#实现instanceof" class="header-anchor">#</a> 实现instanceOf</h2> <div class="language- extra-class"><pre class="language-text"><code>function fakeInstanceOf(child, Parent) {
+    if (Object.getPrototypeOf(Child) === null) return false;
+    return Object.getPrototypeOf(Child) === Parent.protoType;
+}
+</code></pre></div><h2 id="模拟object-create"><a href="#模拟object-create" class="header-anchor">#</a> 模拟Object.create</h2> <div class="language- extra-class"><pre class="language-text"><code>function fakeCreate(protoType) {
+    const Fn = function() {};
+    fn.protoType = protoType;
+    return new Fn();
+}
+</code></pre></div><h2 id="实现json-parse"><a href="#实现json-parse" class="header-anchor">#</a> 实现JSON.parse</h2> <div class="language- extra-class"><pre class="language-text"><code>function parse(json) {
+   return eval(&quot;(&quot; + json + &quot;)&quot;);
+}
+</code></pre></div><h2 id="实现-json-stringify"><a href="#实现-json-stringify" class="header-anchor">#</a> 实现 JSON.stringify</h2> <div class="language- extra-class"><pre class="language-text"><code>function stringify(data) {
+    if (typeof data !== 'object') {
+        return '' + data;
+    }
+
+    const type = Object.protoType.toString.call(param);
+    swtich (type) {
+        // 可以增加其他类型的stringify
+        case 'object Array':
+            let res = `[`;
+            for (let key in param) {
+                res = res + stringify(param[key]) + ',';
+            }
+            return res + ']';
+        default:
+            let res = `{`;
+            for (let key in param) {
+                res = res + `${key}:` + stringify(param[key]) + ',';
+            }
+            return res + '}';
+    }
+}
+</code></pre></div><h2 id="ajax"><a href="#ajax" class="header-anchor">#</a> AJAX</h2> <div class="language- extra-class"><pre class="language-text"><code>function axios(url) {
+    const xhr = XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Mscrosoft.XMLHttp')
+    xhr.open('GET', url, false); 
+    xhr.setRequestHeader('Accept', 'application/json'); 
+    xhr.onReadState = (e) =&gt; {
+        if (xhr.readyState == 4) {  //监听readyState状态
+            if (xhr.state == 200 || xhr.status == 0) {  //监听HTTP状态码
+                var info = xhr.responseText;
+                var o = eval(&quot;(&quot; + info + &quot;)&quot;);  //调用eval()把字符串转换为本地脚本
+                console.log(info);  //显示JSON对象字符串
+                console.log(o.user);  //读取对象属性值，返回字符串“css8”
+            }
+        }
+    }
+    xhr.send();
+}
+
+</code></pre></div><h2 id="解析-url-params-为对象"><a href="#解析-url-params-为对象" class="header-anchor">#</a> 解析 URL Params 为对象</h2> <div class="language- extra-class"><pre class="language-text"><code>function parseParams(url) {
+    const query = url.split('?')[1];
+    return query.split('&amp;').reduce((r, item) =&gt; {
+        const [key, value] = item.split('=');
+        return {
+            ...r,
+            [key]: value,
+        }
+    }, {})
+}
+</code></pre></div><h2 id="实现千位分隔符"><a href="#实现千位分隔符" class="header-anchor">#</a> 实现千位分隔符</h2> <div class="language- extra-class"><pre class="language-text"><code>function thousands() {
+  const str = num + '';
+  return str.split(&quot;&quot;).reverse().reduce((prev, next, index) =&gt; {
+    return ((index % 3) ? next : (next + ',')) + prev;
+  })
+}
+</code></pre></div><h2 id="写一个数组去重方法"><a href="#写一个数组去重方法" class="header-anchor">#</a> 写一个数组去重方法</h2> <div class="language- extra-class"><pre class="language-text"><code>function delRepeat(data) {
+    return Array.from(new Set(data));
+}
+</code></pre></div><h2 id="数组扁平化"><a href="#数组扁平化" class="header-anchor">#</a> 数组扁平化</h2> <div class="language- extra-class"><pre class="language-text"><code>function flat(data) {
+    return data.map(item =&gt; {
+        if (item instanceOf Array) {
+            return flat(item);
+        }
+        return item;
+    })
+}
+
+</code></pre></div><h2 id="函数柯里化"><a href="#函数柯里化" class="header-anchor">#</a> 函数柯里化</h2> <div class="language- extra-class"><pre class="language-text"><code>// 题目
+function add(a, b, c) { 
+    return a + b + c 
+} 
+add(1, 2, 3) 
+let addCurry = curry(add) 
+addCurry(1)(2)(3) 
+// 实现
+
+function curry(fn) {
+    const func = (...args) =&gt; {
+        if (fn.length === args.length) {
+            return fn(...args);
+        }
+        return (...arg) =&gt; func(...args, ...arg);
+    }
+    return func;
+}
+</code></pre></div><h2 id="偏函数"><a href="#偏函数" class="header-anchor">#</a> 偏函数</h2> <p>偏函数就是将一个 n 参的函数转换成固定 x 参的函数，剩余参数(n - x)将在下次调用全部传入。举个例子：</p> <div class="language- extra-class"><pre class="language-text"><code>// 题目
+function add(a, b, c) { 
+    return a + b + c 
+} 
+let partialAdd = partial(add, 1) 
+partialAdd(2, 3) 
+// 实现
+function partial(fn, ...args) {
+    return (...params) =&gt; {
+        return fn(...args, ...params);
+    }
+}
+</code></pre></div></div> <footer><!----> <hr> <!----></footer></article> <div class="sticker vuepress-toc"><div class="vuepress-toc-item vuepress-toc-h2 active"><a href="#手写-new-函数" title="手写 new 函数">手写 new 函数</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#手写-call-函数" title="手写 call 函数">手写 call 函数</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#手写-apply-函数" title="手写 apply 函数">手写 apply 函数</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#手写-bind-函数" title="手写 bind 函数">手写 bind 函数</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#实现类的继承" title="实现类的继承">实现类的继承</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#深克隆-deepclone" title="深克隆（deepclone）">深克隆（deepclone）</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#节流" title="节流">节流</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#防抖" title="防抖">防抖</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#实现instanceof" title="实现instanceOf">实现instanceOf</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#模拟object-create" title="模拟Object.create">模拟Object.create</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#实现json-parse" title="实现JSON.parse">实现JSON.parse</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#实现-json-stringify" title="实现 JSON.stringify">实现 JSON.stringify</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#ajax" title="AJAX">AJAX</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#解析-url-params-为对象" title="解析 URL Params 为对象">解析 URL Params 为对象</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#实现千位分隔符" title="实现千位分隔符">实现千位分隔符</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#写一个数组去重方法" title="写一个数组去重方法">写一个数组去重方法</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#数组扁平化" title="数组扁平化">数组扁平化</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#函数柯里化" title="函数柯里化">函数柯里化</a></div><div class="vuepress-toc-item vuepress-toc-h2"><a href="#偏函数" title="偏函数">偏函数</a></div></div></div></div> <footer class="footer" data-v-3d9deeb8><div class="footer-left-wrap" data-v-3d9deeb8><ul class="contact" data-v-3d9deeb8></ul></div> <div class="footer-right-wrap" data-v-3d9deeb8><ul class="copyright" data-v-3d9deeb8></ul></div></footer></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.a5a1f001.js" defer></script><script src="/assets/js/6.e4377708.js" defer></script><script src="/assets/js/3.97575248.js" defer></script><script src="/assets/js/12.e2ea5c1c.js" defer></script>
+  </body>
+</html>
